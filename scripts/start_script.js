@@ -35,18 +35,28 @@ const day = {
 newTask(day, 'побрить ноги');
 newTask(day, 'сделать ToDo');
 
-for(let task of day)
-    $('.tasks').append(`
+
+$(document).ready(() => {
+    const tasksBlock = $('.tasks');
+
+    for(let task of day)
+        tasksBlock.append(`
         <div class="task">${task['task']}</div>
     `);
 
 
-$('.add-task').on('click', () => {
-    const taskInput = $('.task-input');
+    $('.add-task').click(() => {
+        const taskInput = $('.task-input');
 
-    $('.tasks').append(`
+        $('.tasks').append(`
         <div class="task">${taskInput.val()}</div>
     `);
 
-    taskInput.val('');
+        taskInput.val('');
+    });
+
+
+    tasksBlock.on('click', '.task', function() {
+        this.remove();
+    });
 });
