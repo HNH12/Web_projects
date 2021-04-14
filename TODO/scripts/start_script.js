@@ -54,14 +54,18 @@ $(document).ready(() => {
                 containment: [positionLeftTasksBlock, 0, positionRightTasksBlock, 0],
                 stop: function () {
                     const absLeftBlock = $(this).position().left;
-                    console.log(absLeftBlock);
+                    $(this).css('backgroundColor', '');
+                    $(this).css('left', '0');
                     if(absLeftBlock < (positionLeftTasksBlock/0.9)) {
-                        $(this).toggleClass('checked');
+                        $(this).addClass('checked');
                     } else {
                         if(absLeftBlock > (positionRightTasksBlock/1.1)) {
-                            $(this).toggleClass('deleted');
+                            $(this).addClass('deleted');
                         }
                     }
+                },
+                drag: function() {
+                    $(this).css('backgroundColor', '#fff');
                 }
             }
         );
@@ -78,17 +82,32 @@ $(document).ready(() => {
     taskBlock.draggable(
         {
             axis: "x",
-            containment: [positionLeftTasksBlock, 0, positionRightTasksBlock, 0],
+            containment: [positionLeftTasksBlock*0.8, 0, positionRightTasksBlock*1.2, 0],
             stop: function () {
                 const absLeftBlock = $(this).position().left;
-                console.log(absLeftBlock);
+                $(this).css('backgroundColor', '');
+                $(this).css('left', '0');
                 if(absLeftBlock < (positionLeftTasksBlock/0.9)) {
-                    $(this).toggleClass('checked');
+                    $(this).addClass('checked');
                 } else {
                     if(absLeftBlock > (positionRightTasksBlock/1.1)) {
-                        $(this).toggleClass('deleted');
+                        $(this).addClass('deleted');
                     }
                 }
+            },
+            drag: function() {
+                $(this).css('backgroundColor', function () {
+                    const differenceBetweenBlocks = $(this).offset().left - $(this).parent().offset().left;
+                    console.log(differenceBetweenBlocks);
+                    if(differenceBetweenBlocks < -15) {
+                        console.log('hi');
+                        return `rgb(${255-2*Math.abs(differenceBetweenBlocks)}, 255, ${255-4*Math.abs(differenceBetweenBlocks)})`;
+                    } else {
+                        if (differenceBetweenBlocks > 15) {
+                            return `rgb(252, ${255 - 2 * differenceBetweenBlocks}, ${255 - 4 * differenceBetweenBlocks})`;
+                        }
+                    }
+                });
             }
         }
     );
