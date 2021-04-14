@@ -47,16 +47,17 @@ $(document).ready(() => {
 
     $('.add-task').click(() => {
         const taskInput = $('.task-input');
-
-        $('.tasks').append(`
-        <div class="task">${taskInput.val()}</div>
-    `);
+        const newTask = $(`<div class="task">${taskInput.val()}</div>`);
+        newTask.draggable({axis:"x"});
+        $('.tasks').append(newTask);
 
         taskInput.val('');
     });
 
+    const widthTasksBlock = tasksBlock.width();
+    const positionLeftTasksBlock = tasksBlock.position().left;
+    const positionRightTasksBlock = widthTasksBlock-positionLeftTasksBlock;
+    console.log(positionLeftTasksBlock, positionRightTasksBlock);
 
-    tasksBlock.on('click', '.task', function() {
-        this.remove();
-    });
+    $('.task').draggable({axis:"x", containment: [positionLeftTasksBlock,0, positionRightTasksBlock,0]});
 });

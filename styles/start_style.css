@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.main-panel {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.tasks {
+    width: 60%;
+    margin: 2% auto 0;
+    text-align: left;
+    background-color: antiquewhite;
+}
+
+.add-task-panel {
+    margin: 0 auto;
+    display: flex;
+    text-align: left;
+    width: 60%;
+}
+
+.task-input {
+    padding: 2%;
+    width: 80%;
+}
+
+.add-task {
+    width: 20%;
+}
+
+.task {
+    background-color: aliceblue;
+    border: 1px solid black;
+    padding: 2%;
+}
